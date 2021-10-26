@@ -1,12 +1,11 @@
 package com.example.mvm_i.repo
 
-import com.example.mvm_i.data.local.RoomDatabase
+import com.example.mvm_i.data.local.TaskappDAO
 
-class MyRepository {
+class MyRepository(val taskappDAO: TaskappDAO) {
 
-    val roomDb = RoomDatabase()
 
     fun getDataFromRoom() : String{
-        return roomDb.getData()
+       // return roomDb.getData()
     }
 }

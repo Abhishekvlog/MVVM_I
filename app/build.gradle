@@ -54,11 +54,6 @@ dependencies {
 //Room
     implementation 'androidx.room:room-ktx:2.1.0'
     kapt 'androidx.room:room-compiler:2.1.0'
-// ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$arch_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$arch_version"
 
 //Retrofit
     def retrofit2_version = "2.9.0"

@@ -2,11 +2,11 @@ package com.example.mvm_i.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.mvm_i.repo.MyRepository
 
-class MainViewModel {
+class MainViewModel(val repository: MyRepository) : ViewModel() {
 
-    var repository = MyRepository()
 
     fun getDataFromRepository() : LiveData<String>{
         val mutableLiveData = MutableLiveData<String>()
