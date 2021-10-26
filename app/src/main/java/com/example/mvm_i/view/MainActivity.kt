@@ -6,10 +6,13 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvm_i.R
+import com.example.mvm_i.data.local.Task
 import com.example.mvm_i.data.local.TaskRoomDatabase
 import com.example.mvm_i.data.local.TaskappDAO
 import com.example.mvm_i.repo.MyRepository
 import com.example.mvm_i.viewModel.MainViewModel
+import com.example.mvm_i.viewModel.MyViewModelFactory
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel : MainViewModel
@@ -20,14 +23,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       taskappDAO = TaskRoomDatabase.getDatabaseObject(this).getTaskDAO()
+        taskappDAO = TaskRoomDatabase.getDatabaseObject(this).getTaskDAO()
+
         repository = MyRepository(taskappDAO)
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        val viewModelFactory = MyViewModelFactory(repository)
 
-        viewModel.getDataFromRepository().observe(this, Observer {
-            Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(MainViewModel::class.java)
+
+        val task = Task("New_Title", "New_Desc")
+        viewModel.createTask(task)
+
+        viewModel.getAllTask().observe(this, Observer {
+            var data = ""
+            it.forEach {
+                data +="\n"+ it.title + it.desc
+            }
+            taskTv.text = data
 
         })
+
     }
 }

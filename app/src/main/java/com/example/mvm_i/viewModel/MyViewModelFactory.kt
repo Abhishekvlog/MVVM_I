@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mvm_i.repo.MyRepository
 
-class TaskViewModelFactory(val repo: MyRepository) : ViewModelProvider.Factory {
+class MyViewModelFactory(val repo: MyRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return MainViewModel(repo) as T
     }
